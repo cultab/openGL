@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="webgl-debug.js"></script>
+<script src="gl-matrix-min.js"></script>
+<script src="webgl_1-4.js"></script>
+<script id="vShader" type="x-shader/x-vertex">
+	attribute vec4 aVertexPosition;
+	attribute vec4 aVertexColor;
+	uniform mat4 uPerspectiveViewTransform;
+	varying vec4 vColor;
+	void main() {
+		gl_Position = uPerspectiveViewTransform * aVertexPosition;
+		vColor = aVertexColor;  // Χρώμα κάθε κορυφής (vertex) (r,g,b,a)
+	} 
+</script>
+<script id="fShader" type="x-shader/x-fragment">
+	precision mediump float;
+	varying vec4 vColor;
+	void main() {
+		gl_FragColor = vColor;
+ 	}
+</script>
+</head>
+<body onload="main()">
+<!-- style="width: 95vw; height: 70vh;" -->
+<canvas id="sceneCanvas">
+</canvas>
+<button id="drawSceneButton" onclick="drawScene()">Ξανασχεδίασε!</button>
+<div> FoV :<input type="text" id="fov" value="90" autocomplete="off"> </div>
+<div> View Distance :<input type="text" id="distance" value="5" autocomplete="off"> </div>
+<div>
+	<!-- re-draw the scene everytime we click inside the form -->
+	<!-- some of those times we are going to be clicking on the buttons :) -->
+	<form id="cameraLocation">
+		<!-- Values are abbriviations -->
+		<input type="radio" name="choice" value="lft" > Left-Front-Top </input> <br>
+		<input type="radio" name="choice" value="lfb" > Left-Front-Bottom </input> <br>
+		<input type="radio" name="choice" value="lbt" > Left-Back-Top </input> <br>
+		<input type="radio" name="choice" value="lbb" > Left-Back-Bottom </input> <br>
+		<input type="radio" name="choice" value="rft" > Right-Front-Top </input> <br>
+		<input type="radio" name="choice" value="rfb" > Right-Front-Bottom </input> <br>
+		<input type="radio" name="choice" value="rbt"  checked> Right-Back-Top </input> <br>
+		<input type="radio" name="choice" value="rbb" > Right-Back-Bottom </input> <br>
+	</form>
+</div>
+</body>
+</html>

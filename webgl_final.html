@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="webgl-debug.js"></script>
+<script src="gl-matrix-min.js"></script>
+<script src="webgl_final.js"></script>
+<script id="vShader" type="x-shader/x-vertex">
+	attribute vec4 aVertexPosition;
+	attribute vec2 aTextureCoordinates;
+	uniform mat4 uPerspectiveViewTransform;
+	uniform mat4 uModelTransform;
+	varying vec2 vTextureCoordinates;
+	void main() {
+		gl_Position = uPerspectiveViewTransform * uModelTransform * aVertexPosition;
+		vTextureCoordinates = aTextureCoordinates;
+	} 
+</script>
+<script id="fShader" type="x-shader/x-fragment">
+	precision mediump float; 
+	varying vec2 vTextureCoordinates;
+	uniform sampler2D uSampler;
+	void main() {
+		gl_FragColor = texture2D(uSampler, vTextureCoordinates);
+ 	}
+</script>
+<style>
+	canvas {
+		width: 95vw;
+		height: 70vh;
+	}
+	#top {
+		width: 640px;
+	}
+	.flex-container {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		/* background-color: DodgerBlue; */
+	}
+	#buttons {
+		display: inline-block;
+		/* background-color: Red; */
+		width: 25%;
+	}
+	.var {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		/* background-color: Blue; */
+	}
+	#form {
+		/* background-color: Green; */
+		min-width: 25%;
+	}
+</style>
+</head>
+<body onload="main()">
+<div> FPS:<span id="fps">--</span><BR> </div>
+<div> Θέση ποντικιού x:<span id="mouseX">--</span>, y:<span id="mouseY">--</span> </div>
+<canvas id="sceneCanvas"></canvas>
+<div class="flex-container" id="top">
+	<div id="form">
+		<form id="cameraLocation">
+			<!-- Values are abbriviations -->
+			<input type="radio" name="choice" value="lft" > Left-Front-Top </input> <br>
+			<input type="radio" name="choice" value="lfb" > Left-Front-Bottom </input> <br>
+			<input type="radio" name="choice" value="lbt" > Left-Back-Top </input> <br>
+			<input type="radio" name="choice" value="lbb" > Left-Back-Bottom </input> <br>
+			<input type="radio" name="choice" value="rft" > Right-Front-Top </input> <br>
+			<input type="radio" name="choice" value="rfb" > Right-Front-Bottom </input> <br>
+			<input type="radio" name="choice" value="rbt"  checked> Right-Back-Top </input> <br>
+			<input type="radio" name="choice" value="rbb" > Right-Back-Bottom </input> <br>
+		</form>
+	</div>
+	<div>
+		<div class="var"> FoV: <input type="text" id="fov" value="90" autocomplete="off"> </div>
+		<div class="var"> View Distance: <input type="text" id="distance" value="30" autocomplete="off"> </div>
+		<div class="var"> Rotation Speed: <input type="text" id="rotationSpeed" value="0.01" autocomplete="off"> </div>
+	</div>
+	<div id="buttons">
+		<button id="startAnimationButton" onclick="startAnimation()">Start</button>
+		<button id="stopAnimationButton" onclick="stopAnimation()">Stop</button>
+		<button id="stopAnimationButton" onclick="drawScene()">Draw</button>
+	</div>
+</div>
+</body>
+</html>
