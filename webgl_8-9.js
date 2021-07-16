@@ -343,10 +343,10 @@ function drawScene() {
     // begin drawing table
 
     const tableLegPositions = [
-        [ 9,  9, 10],
-        [ 9, -9, 10],
-        [-9,  9, 10],
-        [-9, -9, 10],
+        [ 9.5,  9.5, 10],
+        [ 9.5, -9.5, 10],
+        [-9.5,  9.5, 10],
+        [-9.5, -9.5, 10],
     ];
 
     // use texture unit 0 for table legs
@@ -356,7 +356,7 @@ function drawScene() {
     // draw the legs using drawBox()
     for (let i = 0; i < tableLegPositions.length; i++) {
         let pos = tableLegPositions[i];
-        let scale = [1, 1, 10];
+        let scale = [0.5, 0.5, 10];
         drawBox(pos, scale);
     }
 
@@ -364,7 +364,7 @@ function drawScene() {
     useTextureUnitForTexture(1, tableTexture);
 
     // table top
-    drawBox([0, 0, 21], [10, 10, 1]);
+    drawBox([0, 0, 20.5], [10, 10, 0.5]);
 
     // floor
     // drawBox([0, 0,  0], [30, 30, 0], [0.6, 0.6, 0.6, 1]);
@@ -372,10 +372,10 @@ function drawScene() {
     // begin drawing stool
 
     const stoolLegPositions = [
-        [ 14.5,  4.5, 5],
-        [ 14.5, -4.5, 5],
-        [  5.5,  4.5, 5],
-        [  5.5, -4.5, 5],
+        [ 14.75,  4.75, 5],
+        [ 14.75, -4.75, 5],
+        [  5.25,  4.75, 5],
+        [  5.25, -4.75, 5],
     ];
 
     // use texture unit 2 for chair legs
@@ -383,7 +383,7 @@ function drawScene() {
 
     for (let i = 0; i < stoolLegPositions.length; i++) {
         let pos = stoolLegPositions[i];
-        let scale = [0.5, 0.5, 5];
+        let scale = [0.25, 0.25, 5];
         drawBox(pos, scale);
     }
 
@@ -391,9 +391,9 @@ function drawScene() {
     useTextureUnitForTexture(3, chairTexture);
 
     // stool top
-    drawBox([10, 0, 10.5], [5, 5, 0.5]);
+    drawBox([10, 0, 10.25], [5, 5, 0.25]);
     // stool back [now it's a chair :) ]
-    drawBox([14.5, 0, 16], [0.5, 5, 5]);
+    drawBox([14.75, 0, 15.5], [0.25, 5, 5]);
 }
 
 

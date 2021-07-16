@@ -413,10 +413,10 @@ function drawScene() {
     // begin drawing table
 
     const tableLegPositions = [
-        [ 9,  9, 10],
-        [ 9, -9, 10],
-        [-9,  9, 10],
-        [-9, -9, 10],
+        [ 9.5,  9.5, 10],
+        [ 9.5, -9.5, 10],
+        [-9.5,  9.5, 10],
+        [-9.5, -9.5, 10],
     ];
 
     // use texture unit 0 for table legs
@@ -426,7 +426,7 @@ function drawScene() {
     // draw the legs using drawBox()
     for (let i = 0; i < tableLegPositions.length; i++) {
         let pos = tableLegPositions[i];
-        let scale = [1, 1, 10];
+        let scale = [0.5, 0.5, 10];
         drawBox(pos, scale);
     }
 
@@ -434,15 +434,15 @@ function drawScene() {
     useTextureUnitForTexture(1, tableTexture);
 
     // table top
-    drawBox([0, 0, 21], [10, 10, 1]);
+    drawBox([0, 0, 20.5], [10, 10, 0.5]);
 
     // begin drawing stool
 
     const stoolLegPositions = [
-        [ 14.5,  4.5, 5],
-        [ 14.5, -4.5, 5],
-        [  5.5,  4.5, 5],
-        [  5.5, -4.5, 5],
+        [ 14.75,  4.75, 5],
+        [ 14.75, -4.75, 5],
+        [  5.25,  4.75, 5],
+        [  5.25, -4.75, 5],
     ];
 
     // the point where the chair's back legs touch the floor
@@ -453,7 +453,7 @@ function drawScene() {
 
     for (let i = 0; i < stoolLegPositions.length; i++) {
         let pos = stoolLegPositions[i];
-        let scale = [0.5, 0.5, 5];
+        let scale = [0.25, 0.25, 5];
         drawBox(pos, scale, mouseWheelRads, fallBackPoint);
     }
 
@@ -461,18 +461,18 @@ function drawScene() {
     useTextureUnitForTexture(3, chairTexture);
 
     // stool top
-    drawBox([10, 0, 10.5], [5, 5, 0.5], mouseWheelRads, fallBackPoint);
+    drawBox([10, 0, 10.25], [5, 5, 0.25], mouseWheelRads, fallBackPoint);
 
     if (fallBackTimes < 4) {
         // stool back [now it's a chair :) ]
-        drawBox([14.5, 0, 16], [0.5, 5, 5], mouseWheelRads, fallBackPoint);
+        drawBox([14.75, 0, 15.5], [0.25, 5, 5], mouseWheelRads, fallBackPoint);
     } else {
         // now it's a chair again >:|
         fallBackRotationRads = fallBackRotationAngle * Math.PI / 180.0;
         // [30.5, 0, 0.5]
         // if the animation is enabled, animate the sliding and rotating
         if (requestID) {
-            drawBox(fallBackPosition, [5, 5, 0.5], fallBackRotationRads, fallBackPosition, [0,0,1]);
+            drawBox(fallBackPosition, [5, 5, 0.25], fallBackRotationRads, fallBackPosition, [0,0,1]);
             if (fallBackPosition[0] < 45) {
                 fallBackRotationAngle += 2;
                 fallBackPosition[0] += 0.5;
@@ -484,7 +484,7 @@ function drawScene() {
                 fallBackPosition[0] += 0.5 * 29;
             }
             fallBackRotationRads = fallBackRotationAngle * Math.PI / 180.0;
-            drawBox(fallBackPosition, [5, 5, 0.5], fallBackRotationRads, fallBackPosition, [0,0,1]);
+            drawBox(fallBackPosition, [5, 5, 0.25], fallBackRotationRads, fallBackPosition, [0,0,1]);
         }
 
     }
