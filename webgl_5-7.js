@@ -153,7 +153,7 @@ function initBuffers() {
     // 3, 0, 1,
     // 1, 3, 0, // face 5
     // 0, 2, 1,
-    // real index = face index + (N * 3), where N = face
+    // real index = face index + (N * 4), where N = face
     let indexMatrix = new Uint16Array([
          0,  1,  2, // face 0
          2,  0,  3,
@@ -259,10 +259,10 @@ function drawScene() {
     // begin drawing table
 
     let tableLegPositions = [
-        [ 9,  9, 10],
-        [ 9, -9, 10],
-        [-9,  9, 10],
-        [-9, -9, 10],
+        [ 9.5,  9.5, 10],
+        [ 9.5, -9.5, 10],
+        [-9.5,  9.5, 10],
+        [-9.5, -9.5, 10],
     ]
 
     let tableLegColors = [
@@ -278,23 +278,23 @@ function drawScene() {
     for (let i = 0; i < tableLegPositions.length; i++) {
         pos = tableLegPositions[i];
         color = tableLegColors[i];
-        scale = [1, 1, 10];
+        scale = [0.5, 0.5, 10];
         drawBox(pos, scale, color);
     }
 
     // table top
-    drawBox([0, 0, 21], [10, 10, 1], [0.2, 0.8, 1.0, 1]);
+    drawBox([0, 0, 20.5], [10, 10, 0.5], [0.2, 0.8, 1.0, 1]);
 
     // floor
-    // drawBox([0, 0,  0], [30, 30, 0], [0.6, 0.6, 0.6, 1]);
+    drawBox([0, 0,  0], [30, 30, 0], [0.6, 0.6, 0.6, 1]);
 
     // begin drawing stool
 
     let stoolLegPositions = [
-        [ 14.5,  4.5, 5],
-        [ 14.5, -4.5, 5],
-        [  5.5,  4.5, 5],
-        [  5.5, -4.5, 5],
+        [ 14.25,  4.75, 5],
+        [ 14.25, -4.75, 5],
+        [  5.25,  4.75, 5],
+        [  5.25, -4.75, 5],
     ]
 
     let stoolLegColors = [
@@ -310,14 +310,14 @@ function drawScene() {
     for (let i = 0; i < stoolLegPositions.length; i++) {
         pos = stoolLegPositions[i];
         color = stoolLegColors[i];
-        scale = [0.5, 0.5, 5];
+        scale = [0.25, 0.25, 5];
         drawBox(pos, scale, color);
     }
 
     // stool top
-    drawBox([10, 0, 10.5], [5, 5, 0.5], [0.0, 0.0, 1.0, 1]);
+    drawBox([10, 0, 10], [5, 5, 0.25], [0.0, 0.0, 1.0, 1]);
     // stool back [now it's a chair :) ]
-    drawBox([14.5, 0, 16], [0.5, 5, 5], [0.0, 0.0, 1.0, 1]);
+    drawBox([14.5, 0, 16], [0.25, 5, 5], [0.0, 0.0, 1.0, 1]);
 
 }
 

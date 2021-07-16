@@ -166,7 +166,7 @@ function initBuffers() {
     // 3, 0, 1,
     // 1, 3, 0, // face 5
     // 0, 2, 1,
-    // real index = face index + (N * 3), where N = face
+    // real index = face index + (N * 4), where N = face
     const indexMatrix = new Uint16Array([
          0,  1,  2, // face 0
          2,  0,  3,
