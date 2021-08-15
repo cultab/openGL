@@ -20,5 +20,12 @@ submit:
 render:
 	R --quiet -e "require(rmarkdown);render('report.rmd');"
 
+deploy:
+	mkdir -p openGL
+	cp *.js *.html *.jpg *.ico openGL/
+
+undeploy:
+	rm -rf openGL/
+
 
 .PHONY: render one two three final
