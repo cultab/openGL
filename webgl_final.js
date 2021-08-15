@@ -501,7 +501,7 @@ function drawScene() {
 
     useTextureUnitForTexture(5, floorTexture);
     // use a box with zero volume for the floor
-    drawBox([0, 0, 0], [50, 50, 0]);
+    drawBox([0, 0, 0], [25, 25, 0]);
 
     // disable polygon offset
 	gl.disable(gl.POLYGON_OFFSET_FILL);
@@ -531,6 +531,7 @@ function drawBox(position, scale, rotation=0, rotationPoint=[0,0,0], rotationAxi
 
     // get rotation around point transformation
     let rotationMatrix = fromAxisRotationAroundPoint(rotation, rotationPoint, rotationAxis);
+
     // last
     glMatrix.mat4.multiply(finalMatrix, finalMatrix, rotationMatrix);
 
@@ -549,6 +550,16 @@ function drawBox(position, scale, rotation=0, rotationPoint=[0,0,0], rotationAxi
     gl.drawElements(gl.TRIANGLES, indexBuffer.itemCount, gl.UNSIGNED_SHORT, 0);
 }
 
+function drawBox2(finalMatrix) {
+
+    gl.uniformMatrix4fv(modelUniformPointer, false, finalMatrix);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+    gl.vertexAttribPointer(vertexPositionAttributePointer, vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
+
+    // finally, draw
+    gl.drawElements(gl.TRIANGLES, indexBuffer.itemCount, gl.UNSIGNED_SHORT, 0);
+}
 /*
  * Return the transformation needed to rotate around a specific point.
  *
